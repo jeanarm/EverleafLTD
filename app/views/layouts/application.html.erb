@@ -8,7 +8,9 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <% if user_signed_in?%>
+  <p><i> Welcome <strong><%=current_user.name%></strong></i>  <br><%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %>
+  <% end %>
   <body>
     <%= yield %>
   </body>
