@@ -5,8 +5,10 @@ RSpec.feature "Task management function", type: :feature do
   # In scenario (alias of it), write the processing of the test for each item you want to check.
   scenario "Test task list" do
       # Create two tasks in advance to use in the task list test
-  Task.create!(title: 'test_task_01', content: 'testtesttest', user_id: '1')
-  Task.create!(title: 'test_task_02', content: 'samplesample', user_id: '2')
+      FactoryBot.create(:task, title: 'Added name 1')
+      FactoryBot.create(:task, title: 'Added name 2')
+      FactoryBot.create(:second_task, title: 'Added name 3', content: 'Added content')
+    end
 
   # visit to tasks_path (transition to task list page)
   visit tasks_path
