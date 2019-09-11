@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
+<%= paginate @tasks %>
+<%= form_tag(tasks_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
 
 <h1>Tasks</h1>
 
@@ -9,7 +15,9 @@
       <th>Content</th>
       <th>User</th>
       <th>Created date</th>
-      <th colspan="4"></th>
+      <th>Expire date</th>
+      <th>Priority</th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -20,6 +28,8 @@
         <td><%= task.content %></td>
         <td><%= task.user.name %></td>
         <td><%= task.created_at %></td>
+        <td><%= task.expired_date %></td>
+        <td><%= task.priority %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,3 +41,5 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+<br><br>
+<%= paginate @tasks %>

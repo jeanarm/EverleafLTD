@@ -12,7 +12,11 @@
 
 <p>
   <strong>User:</strong>
-  <%= @task.user %>
+  <%= @task.user.name %>
+</p>
+<p>
+  <strong>Expired Date:</strong>
+  <%= @task.expired_date %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

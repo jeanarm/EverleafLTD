@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+ .form-group{
+     margin-left: 500px;
+     margin-right: 500px;
+
+ }
+
+

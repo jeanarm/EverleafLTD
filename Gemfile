@@ -64,5 +64,10 @@ group :test do
   gem 'chromedriver-helper'
 end
 gem 'devise'
+gem 'cancancan'
+gem 'kaminari'
+gem 'bootstrap', '~> 4.0'
+gem 'rails_admin'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

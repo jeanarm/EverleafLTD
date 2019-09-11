@@ -5,7 +5,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.order('created_at ASC')
+    
+    @tasks= if params[:term]
+    Task.where('title LIKE ?', "%#{params[:term]}%").order('id ASC').page(params[:page])
+    else
+      Task.order('expired_date ASC').page(params[:page])
+     end
 
   end
 
@@ -71,6 +76,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :content, :user_id)
+      params.require(:task).permit(:title, :content, :user_id, :expired_date, :priority, :term)
     end
 end
