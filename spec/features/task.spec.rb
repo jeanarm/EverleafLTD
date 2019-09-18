@@ -53,6 +53,25 @@ end
     expect(page).to have_text('test')
 
   end
+     
+  scenario 'task must be true' do
+   
+    visit  root_path 
+    fill_in  'Email',  with: 'na@gmail.Com'
+    fill_in  'Password',  with: '1234567'
+    click_on  'Log in'
+    expect(page ).to have_text('Signed in successfully.') 
+   visit  new_task_path
+    fill_in  'Title' ,  with: ' ' 
+    fill_in  'Content' ,  with: 'test'
+    click_on 'Create Task'
+    expect(page).to have_text('1 error prohibited this task from being saved:')
+
+  end
+  end
+
+
+
  
 end
 
