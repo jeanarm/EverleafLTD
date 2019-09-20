@@ -6,6 +6,7 @@ RSpec.feature "Task management function", type: :feature do
   background  do
     User.create!(name: "Armel", email: 'ni@gmail.Com',  password: '1234567')
     User.create!(name: "Nina", email: 'na@gmail.Com',  password: '1234567')
+    User.create!(name: "Yves", email: 'yv@gmail.Com',  password: '1234567')
     
 end
 scenario "Test task list" do
@@ -74,6 +75,41 @@ end
   assert Task.order('created_at DESC')
  
   end
+
+
+  it "Validation does not pass if the title is empty" do
+    task = Task.new(title: '', content: 'Failure test')
+    expect(task).not_to be_valid
+  end
+
+  it "Validation does not pass if content is empty" do
+    task = Task.new(title: 'web', content: '')
+    expect(task).not_to be_valid
+  end
+
+  it "validation passes If content is described in title and content" do
+    visit  root_path 
+    fill_in  'Email',  with: 'ni@gmail.Com'
+    fill_in  'Password' ,  with: '1234567'
+    click_on  'Log in'
+    expect(page).to have_text('Signed in successfully.') 
+   visit  new_task_path
+
+   fill_in  'Title' ,  with: 'Test Title' 
+   fill_in  'Content' ,  with: 'test'
+    click_on 'Create Task'
+
+    # task = Task.new(title: 'Test', content: 'Failure test')
+   
+    expect(page).to have_text('Task was successfully created.')
+  end
+
+
+
+
+
+
+
 
   end
 
