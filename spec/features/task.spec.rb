@@ -68,6 +68,13 @@ end
     expect(page).to have_text('1 error prohibited this task from being saved:')
 
   end
+
+
+  scenario "Test whether tasks are arranged in descending order of creation date" do
+  assert Task.order('created_at DESC')
+ 
+  end
+
   end
 
 
