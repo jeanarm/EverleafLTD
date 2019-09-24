@@ -13,7 +13,8 @@
 | ------------- |:-------------:| -----:   |
 |               | id            |  integer |
 |   profiles    | image         |  text    |
-|               | user_id       |  string  |
+|               | user_id       |  integer |
+
 
 | Table         | Column        | Datatype |
 | ------------- |:-------------:| -----:   |

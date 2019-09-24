@@ -5,7 +5,7 @@
   <%= submit_tag 'Search' %>
 <% end %>
 
-
+<button class="myButton"><%= link_to 'sort by deadline', tasks_path(expired_date: 'true') %></button><br>
 <h1>Tasks</h1>
 
 <table>
@@ -17,7 +17,8 @@
       <th>Created date</th>
       <th>Expire date</th>
       <th>Priority</th>
-      <th colspan="5"></th>
+      <th>Status</th>
+      <th colspan="7"></th>
     </tr>
   </thead>
 
@@ -30,6 +31,7 @@
         <td><%= task.created_at %></td>
         <td><%= task.expired_date %></td>
         <td><%= task.priority %></td>
+        <td><%= task.status %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

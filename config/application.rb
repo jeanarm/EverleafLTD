@@ -26,7 +26,7 @@ module EveryLeaf
                        request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
-    # config.i18n.default_locale = :ja
+    config.i18n.default_locale = :ja
     config.time_zone = 'Japan'
     config.active_record.default_timezone = :local 
 

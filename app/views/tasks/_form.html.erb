@@ -30,8 +30,12 @@
   </div>
 
   <div class:"form-group">
-  <%= form.label :Expired_date %>
+  <%= form.label :Priority %>
   <%= form.radio_button :priority, 'low' %> low  <%= form.radio_button :priority, 'medium' %> medium <%= form.radio_button :priority, 'high' %> high<br />
+</div>
+<div class:"form-group">
+  <%= form.label :status %>
+  <%= form.radio_button :status, 'not started' %> Not Started <%= form.radio_button :status, 'In progress' %> In progress <%= form.radio_button :status, 'Done' %> Done<br />
 </div>
 
 
