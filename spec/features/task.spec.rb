@@ -9,12 +9,16 @@ RSpec.feature "Task management function", type: :feature do
     User.create!(name: "Yves", email: 'yv@gmail.Com',  password: '1234567')
     
 end
-scenario "Test task list" do
+background  do
     visit  root_path
     fill_in  'Email',  with: 'ni@gmail.Com'
     fill_in  'Password' ,  with: '1234567'
     click_on  'Log in'
     expect(page).to have_text('Signed in successfully.')
+end
+
+scenario "Test task list" do
+   
     visit  new_task_path
     fill_in  'Title' ,  with: 'grettings'
     fill_in  'Content' ,  with: 'testtest'
@@ -22,17 +26,9 @@ scenario "Test task list" do
     expect(page).to have_content 'testtest'
 end
 
-  # visit to tasks_path (transition to task list page)
- # visit tasks_path
-
-  # write a test to verify that the string "" testtesttest "" samplesample "is included when accessing the task list page using have_content method
-
+ 
   scenario "Test task creation" do
-    visit  root_path 
-    fill_in  'Email',  with: 'na@gmail.Com'
-    fill_in  'Password',  with: '1234567'
-    click_on  'Log in'
-    expect(page ).to have_text('Signed in successfully.') 
+  
    visit  new_task_path
     fill_in  'Title' ,  with: 'grettings' 
     fill_in  'Content' ,  with: 'testtesttest'
@@ -40,11 +36,7 @@ end
     expect(page).to have_text('Task was successfully created.')
   end
   scenario "Test task details" do
-    visit  root_path 
-    fill_in  'Email',  with: 'na@gmail.Com'
-    fill_in  'Password',  with: '1234567'
-    click_on  'Log in'
-    expect(page ).to have_text('Signed in successfully.') 
+   
    visit  new_task_path
     fill_in  'Title' ,  with: 'grettings' 
     fill_in  'Content' ,  with: 'test'
@@ -57,11 +49,6 @@ end
      
   scenario 'task must be true' do
    
-    visit  root_path 
-    fill_in  'Email',  with: 'na@gmail.Com'
-    fill_in  'Password',  with: '1234567'
-    click_on  'Log in'
-    expect(page ).to have_text('Signed in successfully.') 
    visit  new_task_path
     fill_in  'Title' ,  with: ' ' 
     fill_in  'Content' ,  with: 'test'
@@ -88,25 +75,51 @@ end
   end
 
   it "validation passes If content is described in title and content" do
-    visit  root_path 
-    fill_in  'Email',  with: 'ni@gmail.Com'
-    fill_in  'Password' ,  with: '1234567'
-    click_on  'Log in'
-    expect(page).to have_text('Signed in successfully.') 
+    
    visit  new_task_path
 
    fill_in  'Title' ,  with: 'Test Title' 
    fill_in  'Content' ,  with: 'test'
     click_on 'Create Task'
 
-    # task = Task.new(title: 'Test', content: 'Failure test')
+    
    
     expect(page).to have_text('Task was successfully created.')
   end
+  it "can search" do
+  
+   visit  new_task_path
 
+   fill_in  'Title' ,  with: 'Test Title' 
+   fill_in  'Content' ,  with: 'test' 
+   
+    click_on 'Create Task'
 
+    
+   
+    expect(page).to have_text('Task was successfully created.')
 
+    visit tasks_path
+    fill_in 'term', with: 'Test Title'
+    click_on 'Search'
+    expect(page).to have_content('Test Title')
 
+  end
+
+  it "Can add deadline" do
+
+   visit  new_task_path
+   visit  new_task_path
+
+   fill_in  'Title' ,  with: 'Test Title' 
+   fill_in  'Content' ,  with: 'test' 
+   
+    click_on 'Create Task'
+   
+    visit tasks_path
+    expect(page).to have_content('2019-10-20')
+
+  end
 
 
 

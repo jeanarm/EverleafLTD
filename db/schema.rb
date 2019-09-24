@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_064134) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.date "expired_date"
+    t.date "expired_date", default: "2019-10-20"
     t.integer "priority", default: 0
     t.bigint "user_id"
     t.datetime "created_at", null: false
