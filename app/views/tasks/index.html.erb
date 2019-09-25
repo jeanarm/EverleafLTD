@@ -6,7 +6,8 @@
   <%= submit_tag 'Search' %>
 <% end %>
 
-<button class="myButton"><%= link_to 'sort by deadline', tasks_path(expired_date: 'true') %></button><br>
+<p><button class="myButton"><%= link_to 'sort by deadline', tasks_path(expired_date: 'true') %></button>  <button class="myButton"><%= link_to 'sort by priority', tasks_path(priority: 'true') %></button></p><br>
+
 <h1>Tasks</h1>
 
 <table>

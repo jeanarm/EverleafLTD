@@ -10,6 +10,8 @@ class TasksController < ApplicationController
     Task.where('title LIKE ? or status LIKE? ', "%#{params[:term]}%", "%#{params[:term]}%").order('id ASC').page(params[:page])
     elsif  params[:expired_date]
       Task.order('expired_date DESC').page(params[:page])
+    elsif  params[:priority]
+      Task.order('priority DESC').page(params[:page])
     else
       Task.order('created_at ASC').page(params[:page])
      end

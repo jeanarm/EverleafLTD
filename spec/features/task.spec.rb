@@ -121,9 +121,23 @@ end
 
   end
 
+  it "Can add task priority" do
 
-
-
+    visit  new_task_path
+    visit  new_task_path
+ 
+    fill_in  'Title' ,  with: 'Test Title' 
+    fill_in  'Content' ,  with: 'test' 
+    
+     click_on 'Create Task'
+    
+     visit tasks_path
+     expect(page).to have_content('low')
   end
 
 
+  it "Task can be sorted by priority" do
+    assert Task.order('prioriy DESC')
+   
+    end
+  end
