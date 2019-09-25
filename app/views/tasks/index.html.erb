@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 <%= paginate @tasks %>
 <%= form_tag(tasks_path, method: :get) do %>
+ Enter Title or Status
   <%= text_field_tag :term, params[:term] %>
   <%= submit_tag 'Search' %>
 <% end %>
