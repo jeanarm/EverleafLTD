@@ -13,7 +13,7 @@ class TasksController < ApplicationController
     elsif  params[:priority]
       Task.order('priority DESC').page(params[:page])
     else
-      Task.order('created_at ASC').page(params[:page])
+      Task.order('created_at DESC').page(params[:page])
      end
 
   end
