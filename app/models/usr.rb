@@ -5,5 +5,5 @@ class Usr < ApplicationRecord
    before_validation { email.downcase! }
    has_secure_password
    validates :password, presence: true, length: { minimum: 6 }
-
+   paginates_per  3
 end

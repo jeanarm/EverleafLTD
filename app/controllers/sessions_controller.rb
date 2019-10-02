@@ -5,7 +5,12 @@ class SessionsController < ApplicationController
     usr = Usr.find_by(email: params[:session][:email].downcase)
     if usr && usr.authenticate(params[:session][:password])
       session[:usr_id] = usr.id
+      if usr.admin?
+        redirect_to usrs_path
+      else
+        flash[:notice] = 'You logged in'
       redirect_to tasks_path(usr.id)
+      end
     else
       flash.now[:danger] = 'Login failed'
       render 'new'

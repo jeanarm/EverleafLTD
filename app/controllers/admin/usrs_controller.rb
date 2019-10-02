@@ -1,14 +1,14 @@
 class Admin::UsrsController < ApplicationController
-  before_action :set_usr, only: [:show, :edit, :update, :destroy]
-
+  
+  before_action :set_usr, only: [:show, :edit, :update]
+  
   # GET /usrs
   # GET /usrs.json
   def index
     @usrs = Usr.all
+    @tasks=Task.all
   end
-
-  # GET /usrs/1
-  # GET /usrs/1.json
+ 
   def show
   end
 
@@ -28,7 +28,7 @@ class Admin::UsrsController < ApplicationController
 
     respond_to do |format|
       if @usr.save
-        format.html { redirect_to usrs_url, notice: 'Usr was successfully created.' }
+        format.html { redirect_to admin_usrs_url, notice: 'Usr was successfully created.' }
         format.json { render :show, status: :created, location: @usr }
       else
         format.html { render :new }
@@ -54,6 +54,11 @@ class Admin::UsrsController < ApplicationController
   # DELETE /usrs/1
   # DELETE /usrs/1.json
   def destroy
+    @usr = Usr.find(params[:id])
+    if @usr.tasks.present?
+      @task=Task.where(usr_id: params[:id])
+      @task.destroy_all
+    end
     @usr.destroy
     respond_to do |format|
       format.html { redirect_to usrs_url, notice: 'Usr was successfully destroyed.' }

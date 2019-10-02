@@ -5,7 +5,7 @@ class CreateUsrs < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :password_digest
       t.string :confirm_password
-      t.boolean :admin
+      t.boolean :admin, default: false
 
       t.timestamps
     end

@@ -1,3 +1,4 @@
+
 <%= form_with(model: usr, local: true) do |form| %>
   <% if usr.errors.any? %>
     <div id="error_explanation">
@@ -23,12 +24,12 @@
 
   <div class="field">
     <%= form.label :password %>
-    <%= form.text_field :password %>
+    <%= form.password_field :password %>
   </div>
 
   <div class="field">
     <%= form.label :confirm_password %>
-    <%= form.text_field :confirm_password %>
+    <%= form.password_field :confirm_password %>
   </div>
 
   <div class="field">
@@ -37,6 +38,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Create User' %>
   </div>
 <% end %>
