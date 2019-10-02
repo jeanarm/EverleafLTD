@@ -27,10 +27,10 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-       <% if current_user.id == task.user_id%>
+       <% if current_user.id == task.usr_id%>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= task.user.name %></td>
+        <td><%= task.usr.name %></td>
         <td><%= task.created_at %></td>
         <td><%= task.expired_date %></td>
         <td><%= task.priority %></td>

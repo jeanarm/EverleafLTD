@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_064134) do
+ActiveRecord::Schema.define(version: 2019_10_02_080911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 2019_09_24_064134) do
     t.text "content"
     t.date "expired_date", default: "2019-10-20"
     t.integer "priority", default: 0
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
-    t.index ["user_id"], name: "index_tasks_on_user_id"
+    t.bigint "usr_id"
+    t.index ["usr_id"], name: "index_tasks_on_usr_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,8 +59,18 @@ ActiveRecord::Schema.define(version: 2019_09_24_064134) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "usrs", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "confirm_password"
+    t.boolean "admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "labelings", "labels"
   add_foreign_key "labelings", "tasks"
   add_foreign_key "labels", "users"
-  add_foreign_key "tasks", "users"
+  add_foreign_key "tasks", "usrs"
 end
