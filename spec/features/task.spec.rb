@@ -4,9 +4,9 @@ require 'rails_helper'
 RSpec.feature "Task management function", type: :feature do
   # In scenario (alias of it), write the processing of the test for each item you want to check
   background  do
-    User.create!(name: "Armel", email: 'ni@gmail.Com',  password: '1234567')
-    User.create!(name: "Nina", email: 'na@gmail.Com',  password: '1234567')
-    User.create!(name: "Yves", email: 'yv@gmail.Com',  password: '1234567')
+    Usr.create!(name: "Armel", email: 'ni@gmail.Com',password: '1234567')
+    Usr.create!(name: "Nina", email: 'na@gmail.Com', password: '1234567')
+    Usr.create!(name: "Yves", email: 'yv@gmail.Com',  password: '1234567')
     
 end
 background  do
@@ -14,7 +14,7 @@ background  do
     fill_in  'Email',  with: 'ni@gmail.Com'
     fill_in  'Password' ,  with: '1234567'
     click_on  'Log in'
-    expect(page).to have_text('Signed in successfully.')
+    expect(page).to have_text('You logged in')
 end
 
 scenario "Test task list" do
@@ -140,4 +140,18 @@ end
     assert Task.order('prioriy DESC')
    
     end
+
+    scenario "Admin can create and manage user" do
+   
+      visit  new_admin_usr_url
+      fill_in  'Name' ,  with: 'Armel'
+      fill_in  'Email' ,  with: 'niz@gmail.com'
+      fill_in  'Password' ,  with: '1234567'
+      click_on 'Create User'
+      visit  admin_usrs_url
+      expect(page).to have_content 'Armel'
+  end
+
+
+
   end

@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="color:blue;">Welcome to user management page</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>No of tasks</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usrs.each do |usr| %>
+      <tr>
+        <td><%= usr.name %></td>
+        <td><%= usr.email %></td>
+        <td><%= usr.admin %></td>
+        <td> <%= Task.where(usr_id: usr.id).count %></td>
+        <td><%= link_to 'Show', usr, class:"btn btn-warning"%></td>
+        <td><%= link_to 'Edit', edit_usr_path(usr), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', usr, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_usr_path, class:"btn btn-success" %>
+
+
+<h1 style="color:blue;margin-top:2rem">List of Tasks Created</h1>
+<%= form_tag(tasks_path, method: :get) do %>
+ Enter Title or Status
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search', class:"btn btn-success"%>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>User</th>
+      <th>Created date</th>
+      <th>Expire date</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th colspan="7"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.usr.name %></td>
+        <td><%= task.created_at %></td>
+        <td><%= task.expired_date %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
+        <td><%= link_to 'Show', task, class:"btn btn-warning"%></td>
+        <td><%= link_to 'Edit', edit_task_path(task),class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger"%></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<br><br>
