@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Welcome to user management page</h1>
+<h1 style="color:blue;">Welcome to user management page</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -20,9 +20,9 @@
         <td><%= usr.email %></td>
         <td><%= usr.admin %></td>
         <td> <%= Task.where(usr_id: usr.id).count %></td>
-        <td><%= link_to 'Show', usr %></td>
-        <td><%= link_to 'Edit', edit_usr_path(usr) %></td>
-        <td><%= link_to 'Destroy', usr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', usr, class:"btn btn-warning"%></td>
+        <td><%= link_to 'Edit', edit_usr_path(usr), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', usr, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
         
       </tr>
     <% end %>
@@ -31,19 +31,17 @@
 
 <br>
 
-<%= link_to 'New Usr', new_usr_path %>
+<%= link_to 'New User', new_usr_path, class:"btn btn-success" %>
 
 
-<h1>List of Tasks Created</h1>
+<h1 style="color:blue;margin-top:2rem">List of Tasks Created</h1>
 <%= form_tag(tasks_path, method: :get) do %>
  Enter Title or Status
   <%= text_field_tag :term, params[:term] %>
-  <%= submit_tag 'Search' %>
+  <%= submit_tag 'Search', class:"btn btn-success"%>
 <% end %>
 
-<h1>Tasks</h1>
-
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -67,9 +65,9 @@
         <td><%= task.expired_date %></td>
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', task, class:"btn btn-warning"%></td>
+        <td><%= link_to 'Edit', edit_task_path(task),class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger"%></td>
         </tr>
     <% end %>
   </tbody>

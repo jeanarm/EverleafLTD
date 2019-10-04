@@ -16,7 +16,7 @@
   </head>
   
 
-<nav class="navbar navbar-expand-sm " style="background-color:gray">
+<nav class="navbar navbar-expand" style="background-color:#64b2cd">
   <ul class="navbar-nav" style="color:blue">
     <li class="nav-item active">
       <a class="nav-link" href="#">Task Management</a>
@@ -36,8 +36,8 @@
   </ul>
 </nav>
 <% if logged_in? %>
-    <p> Welcome, <%=current_user.name %> <br>
-    <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+    <p class="wel"> Logged in as , <%=current_user.name %> </p><br>
+   <p> <%= link_to "Logout", session_path(current_user.id), method: :delete, class:"btn btn-danger"%></p>
     <% end %>
 
 
