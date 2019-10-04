@@ -12,6 +12,10 @@
     </div>
   <% end %>
 
+
+  <div class="card">
+  <div class="card-body">   
+  <h1>New  User</h1>
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -41,3 +45,11 @@
     <%= form.submit 'Create User',class:"btn btn-primary" %>
   </div>
 <% end %>
+<%= link_to 'Back', usrs_path, class:"btn btn-dark" %>
+  
+  </div>
+</div>
+
+
+
+  

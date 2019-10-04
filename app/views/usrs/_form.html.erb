@@ -1,4 +1,10 @@
 
+
+
+
+<div class="card">
+<div class="card-body">
+<h1>New User</h1>
 <%= form_with(model: usr, local: true) do |form| %>
   <% if usr.errors.any? %>
     <div id="error_explanation">
@@ -41,3 +47,10 @@
     <%= form.submit 'Create User', class:"btn btn-primary" %>
   </div>
 <% end %>
+<%= link_to 'Back', usrs_path, class:"btn btn-dark" %>
+
+</div>
+</div>
+
+
+
