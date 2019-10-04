@@ -6,9 +6,13 @@ class SessionsController < ApplicationController
     if usr && usr.authenticate(params[:session][:password])
       session[:usr_id] = usr.id
       if usr.admin?
-        redirect_to usrs_path
+        redirect_to admin_usrs_path
+
+        flash[:notice] = 'Welcome administrator'
+      
       else
-        flash[:notice] = 'You logged in'
+        flash[:notice] = 'welcome !! You are redirected to Tasks list because you are not admin!!'
+      
       redirect_to tasks_path(usr.id)
       end
     else

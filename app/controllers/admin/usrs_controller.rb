@@ -1,9 +1,15 @@
 class Admin::UsrsController < ApplicationController
-  
+  before_action :require_admin
   before_action :set_usr, only: [:show, :edit, :update]
   
-  # GET /usrs
-  # GET /usrs.json
+  def require_admin
+    unless current_user.try(:admin?)
+      redirect_to root_path
+    end
+  end
+
+
+
   def index
     @usrs = Usr.all
     @tasks=Task.all
@@ -59,7 +65,7 @@ class Admin::UsrsController < ApplicationController
       @task=Task.where(usr_id: params[:id])
       @task.destroy_all
     end
-    @usr.destroy
+      @usr.destroy
     respond_to do |format|
       format.html { redirect_to usrs_url, notice: 'Usr was successfully destroyed.' }
       format.json { head :no_content }

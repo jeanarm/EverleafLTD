@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root 'sessions#new'
   resources :usrs
+  
   namespace :admin do
-  resources :usrs
+    resources :usrs
   end
   resources :labelings
   resources :labels

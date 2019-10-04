@@ -35,10 +35,6 @@
 
 
 <h1>List of Tasks Created</h1>
-
-
-
-<p id="notice"><%= notice %></p>
 <%= form_tag(tasks_path, method: :get) do %>
  Enter Title or Status
   <%= text_field_tag :term, params[:term] %>
