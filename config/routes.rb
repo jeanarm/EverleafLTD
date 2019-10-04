@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
   resources :labelings
   resources :labels
-  # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   # root 'tasks#index'
   resources :tasks
   
