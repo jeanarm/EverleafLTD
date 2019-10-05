@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+
+
+
+
+
+
+  <div class="card">
+  <div class="card-body">   
+  <h1>New Task</h1>
   <div class:"form-group">
     <%= form.label :title %>
     <%= form.text_field :title,class:"form-control" %>
@@ -43,6 +52,20 @@
 
 
   <div class:"form-group">
-    <%= form.submit%>
+    <%= form.submit 'Create Task', class:"btn btn-success"%>
   </div>
+  <div>
+  <br>
+<%= link_to 'Back', tasks_path, class:"btn btn-dark"  %>
+</div>
 <% end %>
+
+  </div>
+</div>
+
+
+
+
+
+
+

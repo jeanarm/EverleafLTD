@@ -14,7 +14,7 @@ background  do
     fill_in  'Email',  with: 'ni@gmail.Com'
     fill_in  'Password' ,  with: '1234567'
     click_on  'Log in'
-    expect(page).to have_text('You logged in')
+    expect(page).to have_text('welcome !! You are redirected to Tasks list because you are not admin!!')
 end
 
 scenario "Test task list" do
@@ -142,14 +142,15 @@ end
     end
 
     scenario "Admin can create and manage user" do
-   
-      visit  new_admin_usr_url
-      fill_in  'Name' ,  with: 'Armel'
-      fill_in  'Email' ,  with: 'niz@gmail.com'
-      fill_in  'Password' ,  with: '1234567'
-      click_on 'Create User'
+      Usr.create!(name: "Nina", email: 'na@gmail.Com', password: '1234567')
       visit  admin_usrs_url
-      expect(page).to have_content 'Armel'
+      expect(page).to have_content 'Login'
+    fill_in  'Email',  with: 'na@gmail.Com'
+    fill_in  'Password' ,  with: '1234567'
+    click_on  'Log in'
+    visit usrs_path
+    expect(page).to have_text('Nina')
+    
   end
 
 
