@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_080911) do
+ActiveRecord::Schema.define(version: 2019_10_09_081212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 2019_10_02_080911) do
   create_table "labels", force: :cascade do |t|
     t.string "name"
     t.string "string"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_labels_on_user_id"
+    t.bigint "usr_id"
+    t.index ["usr_id"], name: "index_labels_on_usr_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -45,20 +45,6 @@ ActiveRecord::Schema.define(version: 2019_10_02_080911) do
     t.index ["usr_id"], name: "index_tasks_on_usr_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "admin", default: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
   create_table "usrs", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -71,6 +57,6 @@ ActiveRecord::Schema.define(version: 2019_10_02_080911) do
 
   add_foreign_key "labelings", "labels"
   add_foreign_key "labelings", "tasks"
-  add_foreign_key "labels", "users"
+  add_foreign_key "labels", "usrs"
   add_foreign_key "tasks", "usrs"
 end
