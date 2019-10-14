@@ -11,12 +11,6 @@
     </div>
   <% end %>
 
-
-
-
-
-
-
   <div class="card">
   <div class="card-body">   
   <h1>New Task</h1>
@@ -49,8 +43,16 @@
   <%= form.label :status %>
   <%= form.radio_button :status, 'Not Started' %> Not Started <%= form.radio_button :status, 'In Progress' %> In Progress <%= form.radio_button :status, 'Done' %> Done<br />
 </div>
-
-
+<label>label</label>
+<p><%Label.all.each do |label| %>
+  
+  <% if label.usr_id == current_user.id %>
+  
+    <%=form.check_box :labels, {multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+    <label class="label"><%= label.name %></label>
+  <%end%>
+  
+<% end %> </p>
   <div class:"form-group">
     <%= form.submit 'Create Task', class:"btn btn-success"%>
   </div>
