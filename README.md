@@ -26,15 +26,15 @@
 
 
 #Deploy on heroku
-
-1.Install heroku on your
-2.Create account on heroku 
-3.Login 
-4.create an application on heroku with 
+Here are steps
+1. Install heroku on your
+2. Create account on heroku 
+3. Login 
+4. create an application on heroku with 
 ##heroku create
 
-5.Remote the application ypu created
-6.push the aplication you created with
-## git push heroku master
-7.Migrate heroku db with
+5. Remote the application ypu created
+6. push the aplication you created with
+##git push heroku master
+7. Migrate heroku db with
 ##heroku run rake:db migrate
