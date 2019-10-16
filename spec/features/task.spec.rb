@@ -141,18 +141,5 @@ end
    
     end
 
-    scenario "Admin can create and manage user" do
-      Usr.create!(name: "Nina", email: 'na@gmail.Com', password: '1234567')
-      visit  admin_usrs_url
-      expect(page).to have_content 'Login'
-    fill_in  'Email',  with: 'na@gmail.Com'
-    fill_in  'Password' ,  with: '1234567'
-    click_on  'Log in'
-    visit usrs_path
-    expect(page).to have_text('Nina')
     
-  end
-
-
-
   end
