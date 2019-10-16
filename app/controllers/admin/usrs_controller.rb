@@ -1,6 +1,8 @@
 class Admin::UsrsController < ApplicationController
   before_action :require_admin
   before_action :set_usr, only: [:show, :edit, :update]
+  before_action :only_see_own_page, only: [:show]
+  before_action :only_create_user_when_none_signed_in,  only:[:new, :create]
   
   def require_admin
     unless current_user.try(:admin?)
@@ -72,7 +74,23 @@ class Admin::UsrsController < ApplicationController
     end
   end
 
+  
+
+
+
   private
+  def only_see_own_page
+    @user = Usr.find(params[:id])
+    if current_user != @user
+      redirect_to usrs_path, notice: "Sorry, but you are only allowed to view your own profile page."
+    end
+  end
+ 
+ def only_create_user_when_none_signed_in
+    if current_user
+      redirect_to usrs_path,  notice: "you can't create user when signed in"
+    end
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_usr
       @usr = Usr.find(params[:id])
