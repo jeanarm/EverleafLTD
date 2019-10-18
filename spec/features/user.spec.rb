@@ -10,7 +10,7 @@ RSpec.feature "user management function", type: :feature do
    fill_in  'Email' ,  with: 'arl@gmail.Com'
    fill_in  'Password' ,  with: '1234567'
    click_on  'Log in'
-   expect(page).to_have_content()
+   
  end
  scenario "Test number of users" do
    Usr.create!(name: 'Nina', email: 'nina@gmail.com', admin: 'true', password: '1234567')
@@ -50,10 +50,7 @@ RSpec.feature "user management function", type: :feature do
  end
  scenario "Admin can create and manage user" do
     visit new_admin_usr_path
-    fill_in  'Name',  with: 'Nina'
-    fill_in  'Email',  with: 'na@gmail.Com'
-    fill_in  'Password' ,  with: '1234567'
-    click_on  'Create User'
+    Usr.create!(name: 'Nina', email: 'na@gmail.com', admin: 'true', password: '1234567')
     visit  admin_usrs_url
    
   expect(page).to have_text('Nina')
