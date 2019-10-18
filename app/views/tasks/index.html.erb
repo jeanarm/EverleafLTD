@@ -27,7 +27,7 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-       <% if current_user.id == task.usr_id%>
+     
         <td><%= task.title %></td>
         <td><%= task.content %></td>
         <td><%= task.usr.name %></td>
@@ -38,7 +38,7 @@
         <td><%= link_to 'Show', task, class:"btn btn-info" %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class:"btn btn-primary" %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?'}, class:"btn btn-danger" %></td>
-    <% end %>
+    
         </tr>
     <% end %>
   </tbody>

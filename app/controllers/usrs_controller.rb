@@ -29,7 +29,7 @@ class UsrsController < ApplicationController
 
     respond_to do |format|
       if @usr.save
-        format.html { redirect_to admin_usrs_url, notice: 'Usr was successfully created.' }
+        format.html { redirect_to tasks_path, notice: 'Usr was successfully created.' }
         format.json { render :show, status: :created, location: @usr }
       else
         format.html { render :new }

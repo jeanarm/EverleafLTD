@@ -10,6 +10,7 @@ RSpec.feature "user management function", type: :feature do
    fill_in  'Email' ,  with: 'arl@gmail.Com'
    fill_in  'Password' ,  with: '1234567'
    click_on  'Log in'
+   expect(page).to_have_content()
  end
  scenario "Test number of users" do
    Usr.create!(name: 'Nina', email: 'nina@gmail.com', admin: 'true', password: '1234567')
