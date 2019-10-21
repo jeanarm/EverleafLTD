@@ -1,6 +1,6 @@
 class UsrsController < ApplicationController
   before_action :set_usr, only: [:show, :edit, :update]
-  before_action :only_see_own_page, only: [:show]
+  before_action :only_see_own_page, only: [:show,:destroy, :edit]
   before_action :only_create_user_when_none_signed_in , only:[:new, :create]
   # GET /usrs
   # GET /usrs.json
@@ -29,7 +29,7 @@ class UsrsController < ApplicationController
 
     respond_to do |format|
       if @usr.save
-        format.html { redirect_to tasks_path, notice: 'Usr was successfully created.' }
+        format.html { redirect_to @usr, notice: 'Usr was successfully created.' }
         format.json { render :show, status: :created, location: @usr }
       else
         format.html { render :new }
