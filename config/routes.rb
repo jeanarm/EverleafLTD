@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tasks_labels
   root 'sessions#new'
   resources :usrs
   

@@ -7,7 +7,10 @@ class TasksController < ApplicationController
     
     @tasks= if params[:term]
     Task.where('title LIKE ? or status LIKE? ', "%#{params[:term]}%", "%#{params[:term]}%").order('id ASC').page(params[:page])
-    elsif  params[:expired_date]
+  elsif  params[:key]
+    Task.joins(:labels)
+    .where("labels.name LIKE ?", "%#{params[:key]}%").page(params[:page])
+  elsif  params[:expired_date]
       Task.order('expired_date DESC').page(params[:page])
     elsif  params[:priority]
       Task.order('priority DESC').page(params[:page])
@@ -79,6 +82,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :content, :usr_id, :expired_date, :priority, :status, :term)
+      params.require(:task).permit(:title, :content, :usr_id, :expired_date, :priority, :status, :term, :key, label_ids:[])
     end
 end

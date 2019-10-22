@@ -17,13 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :string %>
-    <%= form.text_field :string %>
+    <%= form.label :content %>
+    <%= form.text_field :content%>
   </div>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.text_field :usr_id, value: current_user.id  %>
   </div>
 
   <div class="actions">

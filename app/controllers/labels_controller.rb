@@ -1,6 +1,6 @@
 class LabelsController < ApplicationController
   before_action :set_label, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize, only: [:new, :show, :edit, :update, :destroy, :index]
   # GET /labels
   # GET /labels.json
   def index
@@ -69,6 +69,6 @@ class LabelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def label_params
-      params.require(:label).permit(:name, :string, :user_id)
+      params.require(:label).permit(:name, :content, :usr_id)
     end
 end
