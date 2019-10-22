@@ -3,7 +3,7 @@
 <%= form_tag(tasks_path, method: :get) do %>
  Title or Status
   <%= text_field_tag :term, params[:term] %>
-  <%= submit_tag 'Search',  class:"btn btn-success"%>
+  <%= submit_tag 'Find',  class:"btn btn-success"%>
 <% end %>
 <br>
 <%= form_tag(tasks_path, method: :get) do %>
