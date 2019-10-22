@@ -1,7 +1,7 @@
 class UsrsController < ApplicationController
   before_action :set_usr, only: [:show, :edit, :update]
-  before_action :only_see_own_page, only: [:show,:destroy, :edit]
-  before_action :only_create_user_when_none_signed_in , only:[:new, :create]
+  # before_action :only_see_own_page, only: [:show,:destroy, :edit]
+  # before_action :only_create_user_when_none_signed_in , only:[:new, :create]
   # GET /usrs
   # GET /usrs.json
   def index
@@ -11,6 +11,7 @@ class UsrsController < ApplicationController
   # GET /usrs/1
   # GET /usrs/1.json
   def show
+    @user_tasks=Task.order(:created_at).includes(:usr)
   end
 
   # GET /usrs/new
@@ -29,10 +30,15 @@ class UsrsController < ApplicationController
 
     respond_to do |format|
       if @usr.save
-        session[:usr_id] = @usr.id
-        format.html { redirect_to tasks_path, notice: 'Usr was successfully created.' }
-        format.json { render :show, status: :created, location: @usr }
-      else
+        # session[:usr_id] = @usr.id
+        # if @usr.admin?
+          format.html { redirect_to usrs_url, notice: 'User was successfully created.' }
+          format.json { render :show, status: :created, location: @usr }
+          # else 
+          #   format.html { redirect_to tasks_url, notice: 'Usr was successfully created.' }
+      
+          #    format.json { render :show, status: :created, location: @usr }
+          # end
         format.html { render :new }
         format.json { render json: @usr.errors, status: :unprocessable_entity }
       end
@@ -57,13 +63,14 @@ class UsrsController < ApplicationController
   # DELETE /usrs/1.json
   def destroy
     @usr = Usr.find(params[:id])
-    if @usr.tasks.present?
-      Task.where(usr_id: params[:id]).destroy_all
-    end
-    @usr.destroy
-    respond_to do |format|
-      format.html { redirect_to usrs_url, notice: 'Usr was successfully destroyed.' }
-      format.json { head :no_content }
+    if @usr.id == current_user.id
+      redirect_to admin_usrs_url, notice: "You can not delete signed in user"
+      @admins = Usr.admins
+    elsif @admins == 1
+      redirect_to admin_usrs_url, notice: "At least one admin must remain!"
+    else
+      @usr.destroy
+      redirect_to admin_usrs_url, notice: 'User was successfully destroyed.'
     end
   end
 

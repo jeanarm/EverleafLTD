@@ -1,8 +1,8 @@
 class Admin::UsrsController < ApplicationController
   before_action :require_admin
   before_action :set_usr, only: [:show, :edit, :update]
-  before_action :only_see_own_page, only: [:show]
-  before_action :only_create_user_when_none_signed_in,  only:[:new, :create]
+  # before_action :only_see_own_page, only: [:show]
+  # before_action :only_create_user_when_none_signed_in,  only:[:new, :create]
   
   def require_admin
     unless current_user.try(:admin?)
@@ -18,6 +18,7 @@ class Admin::UsrsController < ApplicationController
   end
  
   def show
+    @user_tasks=Task.order(:created_at).includes(:usr)
   end
 
   # GET /usrs/new
@@ -36,8 +37,15 @@ class Admin::UsrsController < ApplicationController
 
     respond_to do |format|
       if @usr.save
-        format.html { redirect_to admin_usrs_url, notice: 'Usr was successfully created.' }
+        # session[:usr_id] = @usr.id
+        # if @usr.admin?
+        format.html { redirect_to usrs_url, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @usr }
+        # else 
+        #   format.html { redirect_to tasks_url, notice: 'Usr was successfully created.' }
+    
+        #    format.json { render :show, status: :created, location: @usr }
+        # end
       else
         format.html { render :new }
         format.json { render json: @usr.errors, status: :unprocessable_entity }
@@ -63,18 +71,16 @@ class Admin::UsrsController < ApplicationController
   # DELETE /usrs/1.json
   def destroy
     @usr = Usr.find(params[:id])
-    if @usr.tasks.present?
-      @task=Task.where(usr_id: params[:id])
-      @task.destroy_all
-    end
+    if @usr.id == current_user.id
+      redirect_to admin_usrs_url, notice: "You can not delete signed in user"
+      @admins = Usr.admins
+    elsif @admins == 1
+      redirect_to admin_usrs_url, notice: "At least one admin must remain!"
+    else
       @usr.destroy
-    respond_to do |format|
-      format.html { redirect_to usrs_url, notice: 'Usr was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to admin_usrs_url, notice: 'User was successfully destroyed.'
     end
   end
-
-  
 
 
 
