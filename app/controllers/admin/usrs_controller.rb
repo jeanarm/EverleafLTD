@@ -6,7 +6,7 @@ class Admin::UsrsController < ApplicationController
   
   def require_admin
     unless current_user.try(:admin?)
-      redirect_to root_path
+      redirect_to root_path,notice: "are you admin?please login"
     end
   end
 
