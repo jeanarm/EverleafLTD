@@ -6,9 +6,9 @@ class Admin::UsrsController < ApplicationController
   
   def require_admin
     unless current_user.try(:admin?)
-      redirect_to root_path,notice: "are you admin?please login"
+      redirect_to root_path, notice: "are you admin?please login"
     end
-  end
+  end 
 
 
 
@@ -37,15 +37,15 @@ class Admin::UsrsController < ApplicationController
 
     respond_to do |format|
       if @usr.save
-        # session[:usr_id] = @usr.id
-        # if @usr.admin?
-        format.html { redirect_to usrs_url, notice: 'User was successfully created.' }
+        session[:usr_id] = @usr.id
+        if @usr.admin?
+        format.html { redirect_to admin_usrs_url, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @usr }
-        # else 
-        #   format.html { redirect_to tasks_url, notice: 'Usr was successfully created.' }
+         else 
+          format.html { redirect_to tasks_url, notice: 'Usr was successfully created.' }
     
-        #    format.json { render :show, status: :created, location: @usr }
-        # end
+           format.json { render :show, status: :created, location: @usr }
+        end
       else
         format.html { render :new }
         format.json { render json: @usr.errors, status: :unprocessable_entity }

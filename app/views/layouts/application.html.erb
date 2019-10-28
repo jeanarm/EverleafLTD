@@ -15,7 +15,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
-
+  
 <nav class="navbar navbar-expand" style="background-color:#64b2cd">
   <ul class="navbar-nav" style="color:blue">
     <li class="nav-item active">
@@ -34,10 +34,14 @@
     <li class="nav-item" >
     <a class="nav-link" <%= link_to 'Users', usrs_path %></a>
     </li>
+    <% if logged_in? %>
+    <% if current_user.admin? %>
+
     <li class="nav-item" >
     <a class="nav-link" <%= link_to 'Go to admin page', admin_usrs_url %></a>
     </li>
-    
+    <%end %>
+    <%end %>
     <% if logged_in? %>
     <li class="nav-item">
     <a class="nav-link" <%= link_to "Logout", session_path(current_user.id), method: :delete%> </a>
@@ -57,6 +61,7 @@
 
   
   <body>
+  <h1 id="notice"><%= notice %></h1>
     <%= yield %>
 
 

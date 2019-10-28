@@ -88,20 +88,20 @@ end
   end
   it "can search" do
   
-  #  visit  new_task_path
+   visit  new_task_path
 
-  #  fill_in  'Title' ,  with: 'Test Title' 
-  #  fill_in  'Content' ,  with: 'test' 
+   fill_in  'Title' ,  with: 'Test Title' 
+   fill_in  'Content' ,  with: 'test' 
    
-  #   click_on 'Create Task'
+    click_on 'Create Task'
 
    
-  #   expect(page).to have_text('Task was successfully created.')
+    expect(page).to have_text('Task was successfully created.')
 
-  #   visit tasks_path
-  #   fill_in 'term', with: 'Test Title'
-  #   click_on 'Search'
-  #   expect(page).to have_content('Test')
+    visit tasks_path
+    fill_in 'term', with: 'Test Title'
+    click_on 'Find'
+    expect(page).to have_content('Test')
 
   end
 
@@ -139,6 +139,28 @@ end
     assert Task.order('prioriy DESC')
    
     end
+
+    scenario "can search by attached labels " do
+      visit new_label_path
+      fill_in 'Name', with: 'label1'
+      fill_in 'Content', with: 'testlabel1'
+      click_on 'Create Label'
+      visit new_label_path
+      fill_in 'Name', with: 'label2'
+      fill_in 'Content', with: 'testlabel2'
+      click_on 'Create Label'
+      @user=Usr.first
+      @task = Task.create!(title: "Test", content: 'test2',status: 'In progress',usr_id: @user.id)
+      @label1 = Label.first
+       @label2 = Label.last
+       @task.labels = [@label1,@label2]
+      @task.save
+      visit tasks_path
+      fill_in  'key' ,  with: 'label1'
+      click_on 'Search'
+      expect(page).to have_content('test2')
+    end
+
 
     
   end

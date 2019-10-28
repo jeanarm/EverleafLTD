@@ -56,5 +56,26 @@ RSpec.feature "user management function", type: :feature do
   expect(page).to have_text('Nina')
   
 end
+
+scenario " Can Update User" do
+   @user = Usr.first
+   visit edit_admin_usr_path(id: @user.id)
+   fill_in 'Name', with: 'test update'
+   click_on 'Create User'
+   visit admin_usrs_path
+  
+ end
+ scenario 'Can Delete User' do
+   Usr.create!(name: 'jun', email: 'jun@gmail.com', admin: 'true', password: '1234567')
+   @user = Usr.last
+   @user.destroy
+   visit usrs_path
+   expect(page).not_to have_content('jun')
+ end
+
+
+
+
+
 end
 
