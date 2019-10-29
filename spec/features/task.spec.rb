@@ -36,7 +36,7 @@ end
     expect(page).to have_text('Task was successfully created.')
   end
   scenario "Test task details" do
-   
+  
    visit  new_task_path
     fill_in  'Title' ,  with: 'grettings' 
     fill_in  'Content' ,  with: 'test'
